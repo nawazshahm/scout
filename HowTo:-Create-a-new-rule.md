@@ -2,7 +2,8 @@
 
 Scout2 rules use a recursive engine and a battery of test cases, which means no Python or coding skills are necessary to create or modify a rule; however, understanding of Scout2's data structure may be necessary if you're starting from scratch.
 
-## 1. Simple rule
+##### Minimal Scout2 rule definition
+
 All Scout2 rules are defined under `AWSScout2/rules/data/findings/`. The following snippet is the entire definition of the `User without MFA` rule. Let's have a look at the various values that are defined to make it work:
 
 * description: A brief description of the rule, displayed on the service's dashboard.
@@ -26,7 +27,7 @@ All Scout2 rules are defined under `AWSScout2/rules/data/findings/`. The followi
 
 At the very least, these five attributes must be set when creating a new rule for Scout2. 
 
-## 2. Conditions
+#### Formatting of conditions
 
 As mentioned above, the `conditions` attribute is a list of conditions that must be met in order for the processing engine to flag the resource as a finding. The basic format of a condition expression is as follow:
 
@@ -67,6 +68,8 @@ Note that conditions may be nested, so a more complex rule may look like the fol
     ]
 ]
 ```
+
+#### Reusing conditions in multiple findings
 
 To avoid code duplication, conditions that are used in multiple rules may be declared in standalone files and included in a rule. In this case, the definition of the rule's conditions would look as follow.
 
@@ -121,8 +124,43 @@ In order to create a rule or finding that flags EC2 instances whose subnet's NAC
 }
 ```
 
-This snippets illustrates that calls to \_GET\_VALUE\_AT\_ may be nested. In such event, the processing engine resolves the deepest \_GET\_VALUE\_AT\_, then iterates back to the top until all values are resolved. In this example, values would be resolved in this order:
+This snippets illustrates that calls to \_GET\_VALUE\_AT\_ may be nested. In such event, the processing engine resolves the deepest \_GET\_VALUE\_AT\_, then iterates back to the top until all values are resolved. In this example, values
+would be resolved in this order:
 
 1. The subnet ID associated with the network interface
 2. The network ACL ID associated with the previously determined subnet ID
+
+
+#### Type of rules
+
+Scout2 processes two rulesets at each run:
+
+1. The findings ruleset, which is used to compute the data displayed on the
+various dashboards. Unless a different ruleset is specified, the default ruleset
+will be processed. A custom finding ruleset may be specified using the
+`--ruleset` argument, as illustrated below:
+
+```
+./Scout2.py --profile l01cd3v --ruleset AWSScout2/rules/data/rulesets/cis-02-29-2016.json
+```
+
+2. The filters ruleset, which is used to compute filter data on the various
+resource-specific views. There is currently no option to specify a different
+filter ruleset.
+
+
+## Summary
+
+We first introduced how a minium rule definition should look like, and
+introduced a variety of advanced usage throughout this article. The following is
+a complete list of rule attributes that may be defined in the JSON rule
+definition:
+
+* description: A brief description of the rule, displayed on the service's dashboard.
+* rationale: a brief explanation of why the rule matters, displayed when placing the mouse cursor over the ? icon in the service dashboard.
+* path: The path to the resources for which the rule applies. `id` is used when iteration over all items in a list or dictionary should be applied.
+* display_path: The path to the parent resource that must be displayed when inspecting the rule's results.
+* dashboard_name: The human-friendly name of the resources that are checked, displayed on the service's dashboard.
+* conditions: A list of conditions that, if met, will result in the resource to be flagged.
+* id_suffix: If a custom HTML view has been created, this is used to enable color highlighting.
 
