@@ -118,3 +118,9 @@ The name of the parsing function has to be `parse_<resource_type>`, and the inpu
 * `params`: Global parameters, unnecessary in most situations.
 * `region`: Region in which the resource is definedl
 * `topic`: Single resource as returned by the `list` or `describe` API call.
+
+Note that, regardless of the resource's attributes, the default for Scout2 is that the resource's ARN is accessible via the `arn` attribute, and that its name or identifier is accessible via the `name` attribute. This is why, in this case, the `TopicArn` attribute is removed and used to populate the value of the `arn` and `name` attributes.
+
+Subsequently, calls to the `GetTopicAttributes` API are made, and the results are stored within the `topic` object. Additional placeholders for the topic subscriptions are created.
+
+Finally, the `topic` object is saved within the dictionary of topics of the instance of the `SNSRegionConfig` class.
