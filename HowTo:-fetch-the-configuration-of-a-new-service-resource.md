@@ -1,8 +1,18 @@
+# Introduction
+
+This wiki page documents how the scope of Scout2 may be increased, to add support for either a new service or new resource type. Note that, if you plan on submitting a pull request to increase the scope of Scout2, the pull request should be justified by one of the following:
+
+* Improvement of the quality of other findings (_e.g._ remove false positives in unused security group finding).
+* New rules that apply to the new service / resources have been created.
+* Visibility into this type of resource is important for security-related reviews.
 
 ## Step 1: Update the metadata
 
 1. Edit the file under `AWSScout2/configs/data/metadata.json`
-1. Find the service group corresponding to the new service
+1. Find the service group corresponding to the service
+   1. If necessary, create a new service group by matching how AWS organizes services in the console.
+1. Find the service corresponding to the new resource to be fetched
+   1. If necessary, create a new service object in the service group with a `resources` attribute.
 1. Add a new type of resource to be fetched at run time, specify the following:
    1. The boto3 API call that should be made (http://boto3.readthedocs.io/en/latest/reference/services/lambda.html)
    1. The name of the response's attribute that contains the list of resources (from the same boto3 documentation page)
