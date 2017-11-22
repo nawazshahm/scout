@@ -84,3 +84,37 @@ class LambdaConfig(RegionalServiceConfig):
 ```
 
 https://github.com/nccgroup/Scout2/commit/ed001c6408aaadca5b9445accf50adef3816c0d5#diff-5e845193109c8c0bc5e2763cdb6816d1
+
+## Step 4: Create resource-specific parsing functions
+
+In the example above, the entire resource object is stored in the AWS configuration file used by Scout2, which is overkill as in many cases only several attributes are relevant to perform a security review. In other cases, the data fetched may need to be formatted in order to work better with existing code, or completed by making another API call.
+
+For example, when support for SNS topics was created, a custom parser had to be created due to the fact that topic attributes aren't returned when making `sns:ListTopics` API calls. For each topic, an additional API call to the `sns:GetTopicAttributes` endpoint is necessary. This resulted in the following custom parser for SNS topics:
+
+```
+    def parse_topic(self, params, region, topic):
+        """
+        Parse a single topic and fetch additional attributes
+
+        :param params:                  Global parameters (defaults to {})
+        :param topic:                   SNS Topic
+        """
+        topic['arn'] = topic.pop('TopicArn')
+        topic['name'] = topic['arn'].split(':')[-1]
+        (prefix, partition, service, region, account, name) = topic['arn'].split(':')
+        api_client = api_clients[region]
+        attributes = api_client.get_topic_attributes(TopicArn=topic['arn'])['Attributes']
+        for k in ['Owner', 'DisplayName']:
+            topic[k] = attributes[k] if k in attributes else None
+        for k in ['Policy', 'DeliveryPolicy', 'EffectiveDeliveryPolicy']:
+            topic[k] = json.loads(attributes[k]) if k in attributes else None
+        topic['name'] = topic['arn'].split(':')[-1]
+        manage_dictionary(topic, 'subscriptions', {})
+        manage_dictionary(topic, 'subscriptions_count', 0)
+        self.topics[topic['name']] = topic
+```
+
+The name of the parsing function has to be `parse_<resource_type>`, and the input will always be as follow:
+* `params`: TBD
+* `region`: Region in which the resource is defined
+* `topic`: Single resource as returned by the `list` or `describe` API call
