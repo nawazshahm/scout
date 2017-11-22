@@ -1,3 +1,4 @@
+# Introduction
 
 After fetching additional resources, additional work in necessary in order to be able to visualize the resources in the HTML report: creation of a new AngularJS partial that corresponds to the new type of resources that have been fetched.
 
@@ -25,10 +26,10 @@ This commit diff illustrates the creation of a new file that contains a partial 
 In the snippet above, the first script element declares the Handlebars template that will be used for each resource (*i.e.* Lambda). In this case, no detailed work was performed and we used a generic partial that iterates through each attribute of the resource and displays its value. This is a convenient way to get started and may be particularly useful 
 to get familiar with the object's attributes, but does not provide the best visualization experience (*e.g.* no pretty formatting, custom sections, and many attributes that are irrelevant from a security point of view are displayed).
 
-The following snippet is the partial used to display SNS topics. It contains several sections (*i.e.* `list-group-item`) and uses an accordion element to enable collapsing/expanding the topic policy, which is displayed as JSON payload.
+The following snippet is the partial used to display SQS queues. It contains several sections (*i.e.* `list-group-item`) and uses an accordion element to enable collapsing/expanding the queue policy, which is displayed as JSON payload.
 
 ```
-    <!-- SNS queue partial -->
+    <!-- SQS queue partial -->
     <script id="services.sqs.regions.id.queues.partial" type="text/x-handlebars-template">
         <div class="list-group-item active">
           <h4 class="list-group-item-heading">{{name}}</h4>
