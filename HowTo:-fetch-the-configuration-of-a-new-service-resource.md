@@ -6,7 +6,7 @@ This wiki page documents how the scope of Scout2 may be increased, to add suppor
 * New rules that apply to the new service / resources have been created.
 * Visibility into this type of resource is important for security-related reviews.
 
-## Step 1: Update the metadata
+## Step 1: Update The Metadata
 
 1. Edit the file under `AWSScout2/configs/data/metadata.json`
 1. Find the service group corresponding to the service
@@ -37,11 +37,11 @@ This metadata file is used at runtime for the following tasks:
 
 ***Note that changes to this files are not reflected after a ```--local``` run.***
 
-## Step 2: Update the Services configuration
+## Step 2: Update The Services Configuration
 
 If support for a new service was added, in addition to updating the metadata file, the ```ServicesConfig``` object must be updated such that it contains a new configuration variable for this service. The following commit illustrates the enabling support for AWS Lambda: https://github.com/nccgroup/Scout2/commit/ed001c6408aaadca5b9445accf50adef3816c0d5#diff-579dcd8f739afa19c5d767616494a9e3.
 
-## Step 3: Create (or update) the service-specific configuration class
+## Step 3: Create (or Update) The Service-Specific Configuration Class
 
 The following snippet illustrates the most basic service-specific class that may be created. It declares two classes:
 
