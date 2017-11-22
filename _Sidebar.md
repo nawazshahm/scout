@@ -5,3 +5,4 @@
   * [Create a new ruleset](https://github.com/nccgroup/Scout2/wiki/HowTo:-Create-a-new-ruleset)
   * [Create a new rule](https://github.com/nccgroup/Scout2/wiki/HowTo:-Create-a-new-rule)
   * [Export Scout2 data](https://github.com/nccgroup/Scout2/wiki/HowTo:-Exporting-and-Programmatically-Access-of-Scout2-Data)
+* FAQ
