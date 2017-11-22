@@ -115,6 +115,6 @@ For example, when support for SNS topics was created, a custom parser had to be 
 ```
 
 The name of the parsing function has to be `parse_<resource_type>`, and the input will always be as follow:
-* `params`: TBD
-* `region`: Region in which the resource is defined
-* `topic`: Single resource as returned by the `list` or `describe` API call
+* `params`: Global parameters, unnecessary in most situations.
+* `region`: Region in which the resource is definedl
+* `topic`: Single resource as returned by the `list` or `describe` API call.
