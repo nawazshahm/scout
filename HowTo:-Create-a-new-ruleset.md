@@ -72,9 +72,7 @@ Rules that use a list of known CIDRs are parameterized; however, the parameter v
 
 Refer to the [Use trusted CIDRs](https://github.com/nccgroup/Scout2/wiki/HowTo:-Use-a-list-of-trusted-CIDRs) wiki page for further details. 
 
-### TODO: Duplicate a rule
-
-### Generate the ruleset
+# Step 3: Generate the ruleset
 
 Click on the top right "Generate Ruleset" link, download and save the file named `myruleset.json`. 
 
