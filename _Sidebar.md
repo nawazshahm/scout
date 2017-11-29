@@ -1,8 +1,10 @@
 * [Home](https://github.com/nccgroup/Scout2/wiki)
-* How To Use
+* How to Use
+  * [With trusted CIDRs](https://github.com/nccgroup/Scout2/wiki/HowTo:-Use-a-list-of-trusted-CIDRs)
+  * [With a new ruleset](https://github.com/nccgroup/Scout2/wiki/HowTo:-Create-a-new-ruleset)
+  * [With a new rule](https://github.com/nccgroup/Scout2/wiki/HowTo:-Create-a-new-rule)
+  * [Export Scout2 data](https://github.com/nccgroup/Scout2/wiki/HowTo:-Exporting-and-Programmatically-Access-of-Scout2-Data)
+* How to Contribute
   * [Fetch a new service](https://github.com/nccgroup/Scout2/wiki/HowTo:-fetch-configuration-for-a-new-service-or-resource)
   * [Display a new resource](https://github.com/nccgroup/Scout2/wiki/HowTo:-Create-a-custom-partial-for-new-resources)
-  * [Create a new ruleset](https://github.com/nccgroup/Scout2/wiki/HowTo:-Create-a-new-ruleset)
-  * [Create a new rule](https://github.com/nccgroup/Scout2/wiki/HowTo:-Create-a-new-rule)
-  * [Export Scout2 data](https://github.com/nccgroup/Scout2/wiki/HowTo:-Exporting-and-Programmatically-Access-of-Scout2-Data)
 * FAQ
