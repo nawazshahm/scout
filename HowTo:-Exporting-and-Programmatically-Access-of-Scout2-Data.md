@@ -1,8 +1,8 @@
-## Introduction
+# Introduction
 
 Being able to export the tool's finding into arbitrary format that may be consumed by other tools, or used to populate internal tracking system, is a feature that has been requested on many occasions and proved useful many times. This wiki page documents how Scout2's data is stored and how it may be exported to other formats.
 
-#### 1. Data location and format
+# 1. Data location and format
 
 After a Scout2 run completes, all the necessary data is stored in a JavaScript file that is included by the HTML report. This file is located under `scout2-report/inc-awsconfig/aws_config-<profile_name>.js`.
 
@@ -18,7 +18,7 @@ aws_info =
 
 Therefore, the entire data set may be used by discarding the file's first line. The following demonstrates several ways in which the data may be programmatically accessed using various common tools.
 
-### 2. Use in Python
+# 2. Use in Python
 
 The following code snippet illustrates how one may load the Scout2 data in a Python script, assuming this script is in the same folder as the 'scout2-report' folder that contains the Scout2 output.
 ```
@@ -29,7 +29,7 @@ report = Scout2Report('<profile-name>', 'scout2-report')
 aws_config = report.jsrw.load_from_file(AWSCONFIG)
 ```
 
-#### 3. Use with jq
+# 3. Use with jq
 
 Pretty-print the entire Scout2 data:
 ```
@@ -41,7 +41,7 @@ Pretty-print a list of all security groups:
 tail scout2-report/inc-awsconfig/aws_config-l01cd3v.js -n +2 | jq '.services.ec2.regions[].vpcs[].security_groups[]'
 ```
 
-#### 4. Export to CSV
+# 4. Export to CSV
 
 Scout2 comes with a utility tool that enables exporting of a single finding's resources into comma separated values (CSV). The tool, `Scout2Listall`, uses the same processing engine as Scout2.
 
@@ -98,3 +98,37 @@ And instruct the Scout2Listall tool to use this configuration using the `--keys-
 ```
 ./Scout2Listall.py --profile <profile-name> --path ec2.regions.id.vpcs.id.security_groups.id --keys-from-file my-own-config.json
 ```
+
+# 5. Arbitrary output
+
+The `Scout2Listall` tool has a simple template engine that allows users create their own template in order to output Scout2 data to arbitrary formats. In the following example, we will output the list of IAM users ready for GitHub markdown, with the user names displayed in bold and italic.
+
+```
+$ Scout2Listall --config iam-user-without-mfa.json --format-file iam-users-without-mfa.md
+```
+
+The `iam-users-without-mfa.md` is defined as follow, and the output of the above command line has been included in this page just after.
+
+```
+This file is an example demonstrating how to use ```Scout2Listall``` to generate a
+markdown file that contains the list of IAM user names matching a given Scout2
+rule. It will create a list of users, whose name is bold and italic.
+
+_ITEM_(* ***_KEY_(iam.users.id.name)***)_METI_
+```
+
+This file is an example demonstrating how to use ```Scout2Listall``` to generate a
+markdown file that contains the list of IAM user names matching a given Scout2
+rule. It will create a list of users, whose name is bold and italic.
+
+* ***MisconfiguredUser-NoMFA1***
+* ***MisconfiguredUser-NoMFA2***
+* ***MisconfiguredUser-NoMFA3***
+
+The `_ITEM_()_METI_` macro instructs the tool that the list of resources flagged by Scout2 should be rendered in this location. The value returned for each resource is defined between the parenthesis. In this example above, only the user's name is displayed. If we wanted to also output when the user was created, the _ITEM_ line may look as follow.
+
+```
+_ITEM_(* ***_KEY_(iam.users.id.name)***, created on _KEY_(iam.users.id.CreateDate))_METI_
+```
+
+Using this feature, users of Scout2 may leverage the Scout2Listall tool to output data into arbitrary formats.
