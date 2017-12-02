@@ -46,4 +46,17 @@ The screenshot above illustrates that the name of the CIDR is displayed next to 
 
 When an unknown CIDR is found, the `Unknown CIDR` caption is added to the report, which facilitates detection of EC2 security group rules that whitelist network traffic from untrusted IP ranges.
 
+# Step 3: Enable rules leveraging trusted CIDRs
+
+To ease review of security groups, it is possible to enable custom rules that flag security groups with rules authorizing network traffic from undocumented CIDRs. The following screenshot illustrates how to enable one of these rules via the [Scout2 Ruleset Generator]().
+
+![](https://github.com/nccgroup/Scout2/wiki/images/scout2-rulesetgenerator-008.png)
+
+With this custom ruleset and the list of trusted CIDRs, it is then possible to run Scout2 with the following command. This will result in not only documenting the CIDRs, but creating a new entry in the EC2 dashboard to list only security groups that have an CIDR grant referencing an unknown CIDR.
+
+```
+$ Scout2 --ip-ranges my-ip-ranges.json --ruleset my-ruleset.json
+```
+
+![](https://github.com/nccgroup/Scout2/wiki/images/scout2-unknown-cidr-dashboard.png)
 
