@@ -2,7 +2,7 @@
 
 Scout2 rules use a recursive engine and a battery of test cases, which means no Python or coding skills are necessary to create or modify a rule; however, understanding of Scout2's data structure may be necessary if you're starting from scratch.
 
-##### Minimal Scout2 rule definition
+# Minimal Scout2 rule definition
 
 All Scout2 rules are defined under `AWSScout2/rules/data/findings/`. The following snippet is the entire definition of the `User without MFA` rule. Let's have a look at the various values that are defined to make it work:
 
@@ -27,7 +27,7 @@ All Scout2 rules are defined under `AWSScout2/rules/data/findings/`. The followi
 
 At the very least, these five attributes must be set when creating a new rule for Scout2. 
 
-#### Formatting of conditions
+# Formatting of conditions
 
 As mentioned above, the `conditions` attribute is a list of conditions that must be met in order for the processing engine to flag the resource as a finding. The basic format of a condition expression is as follow:
 
@@ -88,7 +88,7 @@ Where the files stored under `AWSScout2/rules/data/conditions/condition-filename
 }
 ```
 
-#### Defining dynamic test values
+# Defining dynamic test values
 
 Sometimes, it can be necessary to perform tests against dynamic values. The \_GET\_VALUE\_AT\_ macro can help to parameterize the rule at runtime. For example, the rule defined in `AWSScout2/rules/data/findings/ec2-security-group-opens-all-ports-to-self.json`, which flags security groups that create a virtually flat network between all instances associated with the group, is defined as follow:
 
@@ -107,7 +107,7 @@ Sometimes, it can be necessary to perform tests against dynamic values. The \_GE
 
 Notice the use of the shared condition "security-group-opens-all-ports" in this rule. The second condition checks whether one of the security group grants authorizes an EC2 security group whose ID matches the source group ID. This is enabled by the use of \_GET\_VALUE\_AT\_
 
-#### Defining dynamic source values
+# Defining dynamic source values
 
 Some rules may require knowledge of the ID associated with different type of resources and combine them in order to fetch the right test value. Similar to test values, the \_GET\_VALUE\_AT\_ command may be used to provide a parameterized path to the source value at runtime. For example, matching EC2 instances with network ACL configuration can be challenging for the following reasons:
 
@@ -131,7 +131,7 @@ would be resolved in this order:
 2. The network ACL ID associated with the previously determined subnet ID
 
 
-#### Type of rules
+# Type of rules
 
 Scout2 processes two rulesets at each run:
 
@@ -149,7 +149,7 @@ resource-specific views. There is currently no option to specify a different
 filter ruleset.
 
 
-## Summary
+# Summary
 
 We first introduced how a minium rule definition should look like, and
 introduced a variety of advanced usage throughout this article. The following is
