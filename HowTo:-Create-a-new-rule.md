@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 Scout2 rules use a recursive engine and a battery of test cases, which means no Python or coding skills are necessary to create or modify a rule; however, understanding of Scout2's data structure may be necessary if you're starting from scratch.
 
