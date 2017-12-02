@@ -77,3 +77,27 @@ Refer to the [Use trusted CIDRs](https://github.com/nccgroup/Scout2/wiki/HowTo:-
 Click on the top right "Generate Ruleset" link, download and save the file named `myruleset.json`. 
 
 ![](https://github.com/nccgroup/Scout2/wiki/images/scout2-rulesetgenerator-007.png)
+
+# Step 4: Run Scout2 using the new ruleset
+
+With the new ruleset downloaded, you may use pass it to Scout2 using the `--ruleset` command line argument, as illustrated below.
+
+```
+$ Scout2 --ruleset ~/Downloads/myruleset.json
+```
+
+If you already fetched the data and just wish to tweak the results, you may run a local analysis of the previously downloaded configuration using the `--local` argument.
+
+```
+$ Scout2 --local --ruleset ~/Downloads/myruleset.json
+```
+
+# Step 5: Tweak a custom ruleset
+
+So far, we've been demonstrated how to generate a custom ruleset based on Scout2's default ruleset. After generating a custom ruleset, you may want to further tweak this new ruleset and use it as a baseline when starting the Scout2 Ruleset Generator. You may do so with the `--base-ruleset` command line argument, as illustrated in the code snippet below.
+
+```
+./Scout2RulesGenerator.py --ruleset-name mynewruleset --base-ruleset ~/Downloads/myruleset.json
+```
+
+Once this is done, you may go through steps 2 through 4 again and improve your custom ruleset and AWS configuration analysis.
