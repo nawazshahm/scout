@@ -1,6 +1,6 @@
 * [Home](https://github.com/nccgroup/Scout2/wiki)
 * How to Use
-  * [With trusted CIDRs](https://github.com/nccgroup/Scout2/wiki/HowTo:-Use-a-list-of-trusted-CIDRs)
+  * [With trusted CIDRs](https://github.com/nccgroup/Scout2/wiki/HowTo:-Use-with-a-list-of-trusted-CIDRs)
   * [With a new ruleset](https://github.com/nccgroup/Scout2/wiki/HowTo:-Use-with-a-custom-ruleset)
   * [Export Scout2 data](https://github.com/nccgroup/Scout2/wiki/HowTo:-Exporting-and-Programmatically-Access-of-Scout2-Data)
 * How to Contribute

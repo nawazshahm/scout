@@ -32,13 +32,18 @@ By default, Scout2 displays the `name` attribute of each CIDR. Running the follo
 $ Scout2 --ip-ranges ip-ranges-demo.json
 ```
 
-![](https://github.com/nccgroup/Scout2/wiki/images/scout2-cidr-name-display-001.png)
-
-![](https://github.com/nccgroup/Scout2/wiki/images/scout2-cidr-name-display-002.png)
-
 In the event that you used an different attribute than name, for example, `office_name`. You may 
 
 ```
 $ Scout2 --ip-ranges ip-ranges-demo.json --ip-ranges-name-key office_name
 ```
+
+![](https://github.com/nccgroup/Scout2/wiki/images/scout2-cidr-name-display-001.png)
+
+The screenshot above illustrates that the name of the CIDR is displayed next to each security group's IP grant.
+
+![](https://github.com/nccgroup/Scout2/wiki/images/scout2-cidr-name-display-002.png)
+
+When an unknown CIDR is found, the `Unknown CIDR` caption is added to the report, which facilitates detection of EC2 security group rules that whitelist network traffic from untrusted IP ranges.
+
 
