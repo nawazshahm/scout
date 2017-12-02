@@ -32,9 +32,9 @@ By default, Scout2 displays the `name` attribute of each CIDR. Running the follo
 $ Scout2 --ip-ranges ip-ranges-demo.json
 ```
 
-![](https://github.com/nccgroup/Scout2/wiki/images/scout2-cidr-display-name-001.png)
+![](https://github.com/nccgroup/Scout2/wiki/images/scout2-cidr-name-display-001.png)
 
-![](https://github.com/nccgroup/Scout2/wiki/images/scout2-cidr-display-name-002.png)
+![](https://github.com/nccgroup/Scout2/wiki/images/scout2-cidr-name-display-002.png)
 
 In the event that you used an different attribute than name, for example, `office_name`. You may 
 
