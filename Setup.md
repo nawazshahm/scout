@@ -1,6 +1,7 @@
 # Requirements
 
-1. Python (see https://travis-ci.org/nccgroup/Scout2 for a list of supported versions)
+1. python (see https://travis-ci.org/nccgroup/Scout2 for a list of supported versions)
+2. python-pip
 
 # Installation from pip
 
