@@ -114,6 +114,14 @@ $ export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
 $ export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ```
 
+# Option: from an EC2 instance with an IAM role
+
+When run from an EC2 instance with an IAM role, Scout2 will use the role's credentials (read at the metadata URI) unless other credentials have been provided.
+
+```
+$ Scout2
+```
+
 # Option: CSV file
 
 If an IAM user downloaded their AWS API key in a CSV file, Scout2 may read these directly from the file using the `--csv-credentials` argument.
