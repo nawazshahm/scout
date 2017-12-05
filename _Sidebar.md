@@ -1,7 +1,7 @@
 * [Home](https://github.com/nccgroup/Scout2/wiki)
 * Getting Started
   * [Setup](https://github.com/nccgroup/Scout2/wiki/Setup)
-  * [Credentials configuration]()
+  * [Credentials configuration](https://github.com/nccgroup/Scout2/wiki/Credentials-configuration)
 * How to Use
   * [With trusted CIDRs](https://github.com/nccgroup/Scout2/wiki/HowTo:-Use-with-a-list-of-trusted-CIDRs)
   * [With a new ruleset](https://github.com/nccgroup/Scout2/wiki/HowTo:-Use-with-a-custom-ruleset)
