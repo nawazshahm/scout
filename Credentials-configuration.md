@@ -12,3 +12,6 @@ Scout2 was designed to work seamlessly on machines used to make AWS API calls, w
 
 In the following section, we will discuss in further details various configurations 
 
+# AWS
+
+
