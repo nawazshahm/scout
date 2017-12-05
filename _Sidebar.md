@@ -1,6 +1,6 @@
 * [Home](https://github.com/nccgroup/Scout2/wiki)
 * Getting Started
-  * [Setup]()
+  * [Setup](https://github.com/nccgroup/Scout2/wiki/Installation-and-Requirements)
   * [Credentials configuration]()
 * How to Use
   * [With trusted CIDRs](https://github.com/nccgroup/Scout2/wiki/HowTo:-Use-with-a-list-of-trusted-CIDRs)
