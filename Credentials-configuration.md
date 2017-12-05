@@ -1,4 +1,4 @@
-**TL;DR:** If you're able to use the AWS CLI, Scout2 should "just run".
+**TL;DR:** If you're able to use the AWS CLI, Scout2 should "just run". If you use profile names, just use the `--profile` argument when running Scout2.
 
 # Introduction
 
