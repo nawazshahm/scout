@@ -18,6 +18,8 @@ This wiki page documents how the scope of Scout2 may be increased, to add suppor
    1. The name of the response's attribute that contains the list of resources (from the same boto3 documentation page)
    1. The path under which the resources will be stored: ```services.<service_name>(.regions.id)(.vpcs.id).<resource_name>```
 
+**Note that the name of the resources in the Scout2 data structure should be in snake case and plural, *i.e.* functions, db_subnet, resource_arns, ...**
+
 In this example, the following payload was added in the ```compute``` service group, as can be seen at https://github.com/nccgroup/Scout2/commit/ed001c6408aaadca5b9445accf50adef3816c0d5#diff-d3ca4ab2899d83e6eb513318af837b8d.
 ```
         "awslambda": {
@@ -85,6 +87,23 @@ class LambdaConfig(RegionalServiceConfig):
 
 https://github.com/nccgroup/Scout2/commit/ed001c6408aaadca5b9445accf50adef3816c0d5#diff-5e845193109c8c0bc5e2763cdb6816d1
 
+## Step 3bis: Test that your fetching code works
+
+**Note that this step is only necessary for testing or if custom parsing of the resource is not necessary.**
+
+At this point, running Scout2 would result in the API calls to be made, resources to be passed to a generic `store_target` function; however, this would fail due to Scout2 not knowing which resource attribute should be used as the resource identifier. This can be specified in `AWSScout2/configs/__init__.py` by adding an entry in the `resource_id_map` dictionary. The key should be matching the snake_case name for the new resources being fetched, and the value should be the name of the attribute to be used as the identifier.
+
+```
+resource_id_map = {
+    'resource_arns': 'ResourceARN',
+    'network_interfaces': 'NetworkInterfaceId',
+    'peering_connections': 'VpcPeeringConnectionId',
+    'subnet_groups': 'DBSubnetGroupName'
+}
+```
+
+**Note that the Scout2 UI will likely have bugs if AWS enables dots (.) in values of the resource identifier attribute. In such case, refer to Step 5.**
+
 ## Step 4: Create resource-specific parsing functions
 
 In the example above, the entire resource object is stored in the AWS configuration file used by Scout2, which is overkill as in many cases only several attributes are relevant to perform a security review. In other cases, the data fetched may need to be formatted in order to work better with existing code, or completed by making another API call.
@@ -124,3 +143,12 @@ Note that, regardless of the resource's attributes, the default for Scout2 is th
 Subsequently, calls to the `GetTopicAttributes` API are made, and the results are stored within the `topic` object. Additional placeholders for the topic subscriptions are created.
 
 Finally, the `topic` object is saved within the dictionary of topics of the instance of the `SNSRegionConfig` class.
+
+## Step 5 (optional): Create a custom identifier value.
+
+If the value of the resource identifier can contain a dot (.), this is likely to cause UI bugs in the Scout2 HTML report. In this case, the `get_non_aws_id` function may be used. The following code snippet illustrates how a custom parsing function may look like.
+
+```
+resource_id = self.get_non_aws_id(resource[name])
+self.resources[resource_id] = resource
+```
